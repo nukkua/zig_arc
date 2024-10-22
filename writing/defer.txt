@@ -1,0 +1,22 @@
+Defer is just something that executes when it gets out of scope or when returns at any point
+
+pub fn main () !void {
+    defer std.debug.print("Two\n", .{});
+    std.debug.print("One ", .{});
+}
+
+pub fn main () !void {
+    const can_error: MyError!i32 = canFail() catch return
+}
+
+
+errdefer it executes when it returns and there is an error inside of the block 
+fn canFail () MyError {
+    errdefer std.debug.print("Failed! \n", .{});
+
+    return MyError.Type1;
+}
+
+
+
+

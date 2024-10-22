@@ -1,0 +1,10 @@
+This shit works with the stdoutput from the os
+const std = @import("std");
+
+pub fn main () !void {
+    const stdout = std.io.getStdOut().writer();
+    
+    try stdout.print(" Hello World!", .{});
+    try stdout.print("{s}", .{}); // for strings
+    try stdout.print("{c}", .{}); // for chars
+}

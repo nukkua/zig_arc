@@ -1,0 +1,61 @@
+1. union errors
+
+const MyOwnError = error {
+    TypeOne,
+    TypeTwo,
+}
+
+fn numberFail (n: u8) MyOwnError {
+    if (n < 4) return MyOwnError.TypeOne;
+    if (n >= 4) return MyOwnError.TypeTwo;
+}
+
+Sometimes we expect a value or a error, for doing that we do it like this
+
+var could_error : MyOwnError!i32 = 20;
+could_error = MyOwnError.TypeOne;
+
+Ways to deal with errors.
+
+fn numberFail (n: u8) MyOwnError!u8 {
+    if (n < 4) return MyOwnError.TypeOne;
+
+    return n;
+}
+1. catch all errors into a value
+const could_fail: MyOwnError!u8 = numberFail(10) catch 10;
+
+2. catch specific errors
+canFail() catch |err| {
+    if (err == FishError.TunaMalfunction) {
+        return 10;
+    }
+};
+3. catch error and return it, we say, this shit broke and we return the error
+both are the same
+
+const x = detect(n) catch |err| return err;
+const x = try detect(n);
+
+4. catch errors with the if keyword
+
+when the type of the value to make the if, it could be an MyOwnError!i32
+
+if(it_could_fail) |val| {
+
+}else |error| {
+    switch(error) {
+        MyOwnError.TypeOne => std.debug.print("Type one", .{}),
+        MyOwnError.TypeTwo => std.debug.print("Type two", .{}),
+    }
+}
+
+
+5. catch errors with the if keyword and using the switch case
+if(it_could_fail) |val| {
+
+}else |error| switch (error) {
+        MyOwnError.TypeOne => std.debug.print("Type one", .{}),
+        MyOwnError.TypeTwo => std.debug.print("Type two", .{}),
+}
+

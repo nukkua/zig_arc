@@ -1,0 +1,19 @@
+The switch keyword, needs to evaluate every possible about
+
+const std = @import("std");
+
+pub fn main () !void {
+    const caracters: []u8 = {1, 2, 3, 4};
+
+    for(caracters) |c| {
+        switch (c) {
+            1 => std.debug.print("1", .{}),
+            2 => std.debug.print("2", .{}),
+            else => std.debug.print("?", .{}),
+
+        }
+    }
+    
+}
+
+    
