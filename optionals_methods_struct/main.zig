@@ -1,4 +1,5 @@
 const std = @import("std");
+const stdout = std.io.getStdOut().writer();
 
 const Bi = struct {
     penis: ?bool = false,
@@ -20,6 +21,17 @@ const Alien = struct {
     }
 };
 
+const TypeStruct = enum {
+    type1,
+    type2,
+    type3,
+};
+
+const SomeStruct = struct {
+    value: u8 = 2,
+    type: TypeStruct = TypeStruct.type1,
+};
+
 const HeatRay = struct {
     damage: u8,
     pub fn zap(self: HeatRay, alien: *Alien) void {
@@ -28,6 +40,17 @@ const HeatRay = struct {
 };
 
 pub fn main() !void {
+    const arr_some_struct: [4]SomeStruct = [_]SomeStruct{
+        SomeStruct{ .value = 0b10000000 },
+        SomeStruct{ .value = 255 },
+        SomeStruct{ .value = 255 },
+        SomeStruct{ .value = 255 },
+    };
+    for (arr_some_struct, 0..) |some_struct, i| {
+        try stdout.print("i -> {d} value-> {b:1>9} ", .{ i, some_struct.value }); // string formatter for numbers infering the type, binary, hex, decimal
+        // {b:1>9}
+    }
+
     const aliens: [4]Alien = [_]Alien{
         Alien.hatch(10),
         Alien.hatch(10),

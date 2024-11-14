@@ -17,14 +17,31 @@ pub fn main() !void {
         }
         std.debug.print("\n", .{});
     }
+
+    // or in switches
+    for (lang_chars) |lg| {
+        switch (lg) {
+            1, 2 => std.debug.print("Hello with 1, 2", .{}),
+            else => std.debug.print("Hello with else", .{}),
+        }
+        std.debug.print("\n", .{});
+    }
+
     const foo: u8 = if (true) lang_chars[0] else lang_chars[1];
 
-    const foobar: u8 = switch (20) {
+    const foobar: u8 = switch (2) {
         1 => 1,
         2 => 2,
         else => unreachable,
     };
 
+    const level: u8 = 4;
+    const category = switch (level) {
+        1...20 => 10,
+        else => 20,
+    };
+
+    std.debug.print("category -> {}", .{category});
     std.debug.print("\n foo -> {}", .{foo});
     std.debug.print("\n foobar -> {}", .{foobar});
 }

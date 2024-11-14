@@ -26,8 +26,8 @@ pub fn main() !void {
         .experience = 20,
         .health = 100,
     };
+    std.debug.print("colors -> {} \n", .{Colors.red});
 
-    // buff of health
     glorp_the_wise.health += 10;
     std.debug.print("{any}", .{glorp_the_wise});
 }

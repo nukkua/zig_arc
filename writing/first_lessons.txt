@@ -13,6 +13,8 @@ zeros.len; // 2
 4. strings
 At the time they are array of const u8
 const string  = [_]const u8 {'H', 'e', 'l', 'l', 'o'};
+const large_string = \\ Hola como estas
+                     \\ Pene;
 
 5. ifs are always evaluated as booleans, it never exist a conversion 
    ternary -> if () true else false;
