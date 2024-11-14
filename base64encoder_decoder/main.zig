@@ -29,7 +29,6 @@ const Base64 = struct {
 };
 
 pub fn main() !void {
-    try stdout.print("Hello \n", .{});
     const base64 = Base64.init();
 
     try stdout.print("{c}", .{base64._chart_at(10)});
