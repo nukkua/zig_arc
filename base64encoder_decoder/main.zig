@@ -1,16 +1,35 @@
 const std = @import("std");
 const stdout = std.io.getStdOut().writer();
 
+fn _calc_decode_len(input: []const u8) !usize {
+    if (input.len < 4) {
+        const n_output: usize = 3;
+
+        return n_output;
+    }
+    const n_output: usize = try std.math.divFloor(
+        usize,
+        input.len,
+        4,
+    );
+
+    return n_output * 3;
+}
+
 fn _calc_encode_len(input: []const u8) !usize {
     if (input.len < 3) {
         const n_output: usize = 4;
 
         return n_output;
     }
+    const n_output: usize = try std.math.divCeil(usize, input.len, 3);
+
+    return n_output * 4;
 }
 
 const Base64 = struct {
     _table: *const [64]u8,
+
     const Self = @This();
 
     pub fn init() Self {
